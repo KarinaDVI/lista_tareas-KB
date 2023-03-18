@@ -16,9 +16,12 @@ let dateArray =[]
 if (text !== ""){
 
   const li = document.createElement("li");
+  li.setAttribute("id","li-id")
   const p = document.createElement("p");
   const dp =document.createElement("p")
+  const div = document.createElement("div")
 
+  div.className="div-btn";
   p.textContent = text;
   dp.textContent = dateValue;
   dp.className="date-text";
@@ -40,8 +43,9 @@ if (text !== ""){
     li.appendChild(dp);
     li.appendChild(p);
     ul.appendChild(li);
-    li.appendChild(addDeleteBtn())
-    li.appendChild(addDoneBtn())
+    li.appendChild(div)
+    div.appendChild(addDeleteBtn())
+    div.appendChild(addDoneBtn())
 
   console.log({dateArray})
   input.value = "";
@@ -62,9 +66,11 @@ function addDeleteBtn () {
   deleteBtn.className = "btn-delete";
   
   deleteBtn.addEventListener("click", (e)=>{
-    const item = e.target.parentElement;
+    const item = e.target.parentElement.parentElement;
+    const parent =item.parentElement
+    console.log({parent})
     item.parentElement.removeChild(item);
-
+    
     const items = document.querySelectorAll("li");
 
     if(items.length === 0){
