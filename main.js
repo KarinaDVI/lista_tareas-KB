@@ -115,9 +115,9 @@ function addDoneBtn(){
   doneBtn.className = "btn-done";
   
   doneBtn.addEventListener("click", (e)=>{
-    const item = e.target.parentElement;
+    const item = e.target.parentElement.parentElement;
     
-    if(e.target.parentElement.className!=="done"){
+    if(e.target.parentElement.parentElement.className!=="done"){
       ul.removeChild(item);
       uld.appendChild(item);
     }
