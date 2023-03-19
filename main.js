@@ -3,7 +3,7 @@ const date = document.querySelector("#input-date");
 const addBtn = document.querySelector(".btn-add");
 const ul = document.querySelector("ul");
 const empty = document.querySelector(".empty");
-const uld = document.querySelector("#done")
+const uld = document.querySelector(".done")
 
 addBtn.addEventListener("click", (e)=>{
 
@@ -13,7 +13,7 @@ const text = input.value;
 const dateValue = date.value;
 let dateArray =[]
 
-if (text !== ""){
+if (text !== "" && dateValue !==""){
 
   const li = document.createElement("li");
   li.setAttribute("id","li-id")
@@ -67,8 +67,6 @@ function addDeleteBtn () {
   
   deleteBtn.addEventListener("click", (e)=>{
     const item = e.target.parentElement.parentElement;
-    const parent =item.parentElement
-    console.log({parent})
     item.parentElement.removeChild(item);
     
     const items = document.querySelectorAll("li");
@@ -117,14 +115,25 @@ function addDoneBtn(){
   doneBtn.addEventListener("click", (e)=>{
     const item = e.target.parentElement.parentElement;
     
-    if(e.target.parentElement.parentElement.className!=="done"){
-      ul.removeChild(item);
-      uld.appendChild(item);
+    if(e.target.parentElement.parentElement.parentElement.className!=="done"){
+      try{
+        ul.removeChild(item);
+      }
+      catch(error){
+        console.log("no hay nada para eliminar1");
+      }
+        uld.appendChild(item);
     }
-    
-    
-    
+    else{
+      try{
+        uld.removeChild(item);
+      }catch(error){
+        console.log("no hay nada para remover2");
+      }
+      ul.appendChild(item);
+    }
     });
+
     const items = document.querySelectorAll("li");
 
     if(items.length === 0){

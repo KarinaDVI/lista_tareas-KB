@@ -12,9 +12,17 @@
         <h1>Listas de tareas</h1>
         <div class="tareasList">
             <form>
-                <input type="date" id="input-date" placeholder="Fecha..">
-                <input type="text" id="input-text" placeholder="Agrega tu tarea..">
-                <button class="btn-add">+</button>
+                <div>
+                    <label for="input-date">Día</label>
+                    <input type="date" id="input-date" placeholder="Fecha..">
+                </div>
+                
+                <div>
+                    <label for="input-text">Tarea</label>
+                    <input type="text" id="input-text" placeholder="Agrega tu tarea..">
+                    <button class="btn-add">+</button>
+                </div>
+                
             </form>
         </div>
         <div class="container-task">
@@ -28,7 +36,7 @@
             <!--Contenedor de tareas hechas-->
             <div class="task-done">
                 <h4>Completadas</h4>
-                <ul id="done"></ul>
+                <ul class="done"></ul>
             </div>
         </div>
 
