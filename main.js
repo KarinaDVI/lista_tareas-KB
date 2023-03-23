@@ -23,7 +23,6 @@ const dateValue = date.value;
 if (text !== "" && dateValue !==""){
 
   const li = document.createElement("li");
-  li.setAttribute("id","li-id")
   const p = document.createElement("p");
   const dp =document.createElement("p")
   const div = document.createElement("div")
