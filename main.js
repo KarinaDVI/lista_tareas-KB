@@ -233,8 +233,11 @@ historial.addEventListener("mouseenter",(e)=>{
 })
 
 //Oculta el historial al pasar el mouse por el
-/* historial.addEventListener("mouseleave",(e)=>{
-  hist.style.display = "none"
-  }); */
+historial.addEventListener("mouseleave",(e)=>{
+  setTimeout(function(){
+    hist.style.display = "none"
+  },5000)
+  
+  }); 
 
 
