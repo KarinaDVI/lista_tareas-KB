@@ -8,7 +8,6 @@ const uld = document.querySelector(".done")
 const hist = document.querySelector("#hist")
 const historial = document.querySelector(".container-hist")
 let today = new Date();
-today.setHours(0, 0, 0, 0);
 
 let textArray =["Date,Task,State"]
 let state;
@@ -85,7 +84,7 @@ function addDeleteBtn () {
   deleteBtn.addEventListener("click", (e)=>{
     const item = e.target.parentElement.parentElement;
     item.parentElement.removeChild(item);
-    show(item.children[0].innerText,item.children[1].innerText,"deleted at "+today.getTime())
+    show(item.children[0].innerText,item.children[1].innerText,"deleted at "+today.toLocaleString())
     const items = document.querySelectorAll("li");
 
     if(items.length === 0){
@@ -218,7 +217,7 @@ historial.addEventListener("mouseenter",(e)=>{
     sph.className="date-text"
     spi.textContent = splited[1]
     spi.className="text-text"
-    spj.textContent = splited[2]
+    splited[3]?spj.textContent = splited[2]+", "+splited[3]:spj.textContent = splited[2]
     spj.className="state-text"
     ptx.classList="p-flex"
     ptx.appendChild(sph)
