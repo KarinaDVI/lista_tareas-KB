@@ -31,19 +31,8 @@ if (text !== "" && dateValue !==""){
   dp.textContent = dateValue;
   dp.className="date-text";
   p.className="task-text";
-/*
-    if(dateArray.indexOf(dp.textContent)==-1){
-      dateArray.push(dateValue);
-      console.log({dateArray})
-      console.log(dateValue);
-        li.appendChild(p);
-        li.appendChild(dp);
-        ul.appendChild(li);
-    }else{
-        li.appendChild(p);
-        ul.appendChild(li);
-    };
-    */
+
+
     
   li.appendChild(dp);
   li.appendChild(p);
@@ -54,12 +43,6 @@ if (text !== "" && dateValue !==""){
 
   show(dateValue,text, "pending")
     
-  
-/**
- * appendChilds(hist, dateValue, text, state)
- * console.log({textArray})
- */
-  
   
   input.value = "";
   dateValue.value ="";
@@ -95,33 +78,11 @@ function addDeleteBtn () {
 };
 
 
-
-/**Funcion mia
- * 
- 
-function addDeleteBtn () {
-  
-  const deleteBtn = document.createElement("button");
-
-  deleteBtn.textContent = "X";
-  deleteBtn.className = "btn-delete";
-
-  deleteBtn.addEventListener("click", (e)=>{
-    if(deleteBtn.parentNode.hasChildNodes()){
-      console.log(deleteBtn.parentNode.firstChild.textContent)
-      deleteBtn.parentNode.remove((deleteBtn.parentNode.firstChild))
-    }
-  })
-  
-return deleteBtn
-}
-*/
 /**
  * 
  * @returns Funcion para agregar un boton de tarea hecha
  */
 
-/** Tarea Hecha */
 function addDoneBtn(){
   const doneBtn = document.createElement("button");
 
@@ -153,8 +114,7 @@ function addDoneBtn(){
       }
       ul.appendChild(item);
       show(item.children[0].innerText,item.children[1].innerText, "pending")
-/*       textArray.push(item.children[0].innerText+" "+item.children[1].innerText+" pending")
- */    }
+    }
     });
 
     const items = document.querySelectorAll("li");
@@ -163,25 +123,17 @@ function addDoneBtn(){
     }
     return doneBtn
   };
- 
-/*   textArray.forEach((element)=>{
-    const tx=element
-    const lih =document.createElement("li");
-    const ph = document.createElement("p")
-    ph.textContent = tx;
-    lih.appendChild(ph)
-    hist.appendChild(lih);
-  }); */
 
-  //Función para agregar hijos a padres
+
+  //Función para agregar hijos a padres(no la usé)
 function appendChilds(parent,dateValue,text,state) {
-  //check function argument is an element
+  //chequear si el argumento pasado a la función es un nodo válido
   if (parent.nodeType !== undefined) {
     textArray.push(textValue+" "+text+" "+state)
     const pDate = document.createElement("p");
     pDate.innerText = dateValue+" "+text+" "+state;
     
-    //finally append child to parent
+    //Agrega el hijo al padre
     parent.appendChild(pDate);
   }
   return textArray
@@ -200,7 +152,7 @@ function show(date, text, state){
 /**Muestra el historial al pasar el mouse por el div */
 /* */
 historial.addEventListener("mouseenter",(e)=>{
-    console.log("pase por el historial")
+    //console.log("pase por el div del historial")
 
     hist.innerHTML = ""
     console.log(textArray)
@@ -219,10 +171,14 @@ historial.addEventListener("mouseenter",(e)=>{
     spi.className="text-text"
     splited[3]?spj.textContent = splited[2]+", "+splited[3]:spj.textContent = splited[2]
     spj.className="state-text"
+     
     ptx.classList="p-flex"
     ptx.appendChild(sph)
     ptx.appendChild(spi)
+    splited[0].includes("Date")?null:spi.appendChild(addRedoBtn(splited[1]))
+    
     ptx.appendChild(spj)
+    
     console.log(ptx)
     lih.appendChild(ptx)
     hist.appendChild(lih);
@@ -230,12 +186,26 @@ historial.addEventListener("mouseenter",(e)=>{
     
   });
 })
+function addRedoBtn(text){
+  
+  const btnRe = document.createElement("button")
+  btnRe.className="btn-redo";
+  btnRe.textContent="copy"
+  btnRe.addEventListener("click",(e)=>{
+  input.value="";
+  input.value=text;
+  
+})
 
-//Oculta el historial al pasar el mouse por el
+return btnRe;
+}
+
+
+//Oculta el historial al pasar el mouse por él
 historial.addEventListener("mouseleave",(e)=>{
-  setTimeout(function(){
+  //setTimeout(function(){
     hist.style.display = "none"
-  },5000)
+  //},5000)
   
   }); 
 

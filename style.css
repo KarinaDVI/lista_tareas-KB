@@ -126,7 +126,18 @@ input {
   color:rgb(0, 255, 149);
   cursor: pointer;
 }
-
+.btn-redo{
+  background-color:transparent;
+  color: rgba(0, 75, 75, 0.561);
+  border:2px solid rgba(0, 75, 75, 0.561);
+  border-radius: 30px;
+  margin: 3%;
+}
+.btn-redo:hover{
+  border-color:rgba(0, 135, 135, 0.561);
+  background-color:rgb(0, 255, 149);
+  color:white;
+}
 .div-btn {
   display: grid;
   grid-row: 1/2;
