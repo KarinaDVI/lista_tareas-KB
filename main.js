@@ -190,7 +190,7 @@ function addRedoBtn(text){
   
   const btnRe = document.createElement("button")
   btnRe.className="btn-redo";
-  btnRe.textContent="copy"
+  btnRe.innerHTML="&#10064"
   btnRe.addEventListener("click",(e)=>{
   input.value="";
   input.value=text;

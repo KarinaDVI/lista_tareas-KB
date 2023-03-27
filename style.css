@@ -83,12 +83,12 @@ div{
   justify-content: center;
   margin-left: auto;
   margin-right: auto;
-  width: 100%;
+  width: 80%;
 }
 
 form {
-    display: block;
-    grid-template-columns: auto auto;
+    display: grid;
+    grid-template-columns: 40% 60%;
     width:100%;
 }
 
@@ -112,6 +112,11 @@ input {
   font-size: 1.4rem;
   outline: none;
 }
+.btn-add:hover{
+  cursor: pointer;
+  font-weight: 800;
+}
+
 .btn-done {
   grid-column: 3/3;
   grid-row: 1/2;
@@ -132,6 +137,8 @@ input {
   border:2px solid rgba(0, 75, 75, 0.561);
   border-radius: 30px;
   margin: 3%;
+  font-family: fantasy;
+  font-weight: bold;
 }
 .btn-redo:hover{
   border-color:rgba(0, 135, 135, 0.561);
