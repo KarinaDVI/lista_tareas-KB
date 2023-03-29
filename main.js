@@ -7,11 +7,16 @@ const empty = document.querySelector(".empty");
 const uld = document.querySelector(".done")
 const hist = document.querySelector("#hist")
 const historial = document.querySelector(".container-hist")
+const btnMore = document.querySelector(".btn-more")
+const btnMoreHide = document.querySelector("#btn-more-hide")
 let today = new Date();
 
 let textArray =["Date,Task,State"]
 let state;
 
+/**
+ * @returns Botón de agregar tarea
+ */
 addBtn.addEventListener("click", (e)=>{
 
 e.preventDefault();
@@ -89,7 +94,7 @@ function addDoneBtn(){
   doneBtn.textContent = "V";
   doneBtn.className = "btn-done";
 
-  /** Botón de tarea hecha */
+  /** Evento para botón de tarea hecha */
   doneBtn.addEventListener("click", (e)=>{
     const item = e.target.parentElement.parentElement;
     
@@ -103,7 +108,7 @@ function addDoneBtn(){
         
         uld.appendChild(item);
         show(item.children[0].innerText,item.children[1].innerText, "done")
-        console.log(item.children[0].innerText+" "+item.children[1].innerText+" done");
+       // console.log(item.children[0].innerText+" "+item.children[1].innerText+" done");
     }
     else{
       try{
@@ -143,31 +148,75 @@ function appendChilds(parent,dateValue,text,state) {
 function show(date, text, state){
   
   textArray.push(date+","+text+","+state)
-  console.log(textArray)
+  //console.log(textArray)
   return textArray;
 
 }
 
 
-/**Muestra el historial al pasar el mouse por el div */
-/* */
+/** 
+ @returns Función para mostrar en el historial 
+ solo las tareas que se hayan hecho más de 5 veces
+ */
+
 historial.addEventListener("mouseenter",(e)=>{
     //console.log("pase por el div del historial")
 
     hist.innerHTML = ""
-    console.log(textArray)
+    //console.log(textArray)
+    let splited1=[]
+    /*Divide el array original en 3 partes y toma el texto para
+    ponerlo en otro array */
+    textArray.forEach(element=>{
+      splited = element.split(",")
+      splited1.push(splited[1])
+    })
+    const lie=document.getElementById("hist").innerHTML=`<li><p>Tareas</p></li>`
+    
+    /**Muestra las hechas mas de 5 veces */
+    
+    Object.entries(conteo(splited1)).forEach(([key, value])=>{
+      if(value>5){
+
+        const lih = document.createElement("li");
+        const spi = document.createElement("span")
+        const ptx = document.createElement("p")
+        spi.textContent=key
+        spi.appendChild(addRedoBtn(key))
+        //console.log(ptx)
+        ptx.appendChild(spi)
+        lih.appendChild(ptx)
+        hist.appendChild(lih);
+        hist.style.display = "block"
+
+      }
+      })
+    })
+    
+/**
+ * 
+ * @param {} array 
+ * @returns Función para tener un 
+ * historial completo(detalles de tareas altas, bajas y hechas):
+ */
+
+  btnMore.addEventListener("click",(e)=>{
+    //console.log("pase por el div del historial")
+    btnMore.style.display = "none"
+    btnMoreHide.style.display = "block"
     textArray.forEach((element)=>{
-    console.log(element)
+    //console.log(element)
     const lih = document.createElement("li");
     const sph = document.createElement("span")
     const spi = document.createElement("span")
     const spj = document.createElement("span")
     const ptx = document.createElement("p")
     let splited = element.split(",")
-
+   
     sph.textContent = splited[0]
     sph.className="date-text"
     spi.textContent = splited[1]
+
     spi.className="text-text"
     splited[3]?spj.textContent = splited[2]+", "+splited[3]:spj.textContent = splited[2]
     spj.className="state-text"
@@ -179,15 +228,25 @@ historial.addEventListener("mouseenter",(e)=>{
     
     ptx.appendChild(spj)
     
-    console.log(ptx)
+    //console.log(ptx)
     lih.appendChild(ptx)
     hist.appendChild(lih);
-    hist.style.display = "block"
+    hist.style.display = "block" 
     
   });
 })
+
+
+function conteo(array){
+  return array.reduce((a,b)=>(a[b]? a[b]+=1 : a[b] = 1, a),{});
+}
+
+/**
+ * 
+ * @param {} text 
+ * @returns Agrega botón para copiar tarea al input
+ */
 function addRedoBtn(text){
-  
   const btnRe = document.createElement("button")
   btnRe.className="btn-redo";
   btnRe.innerHTML="&#10064"
@@ -205,8 +264,21 @@ return btnRe;
 historial.addEventListener("mouseleave",(e)=>{
   //setTimeout(function(){
     hist.style.display = "none"
+    btnMoreHide.style.display = "none"
+    btnMore.style.display = "block"
   //},5000)
   
   }); 
+  /**
+   * @return Función para ocultar detalles
+   */
+  btnMoreHide.addEventListener("click",(e)=>{
+    //setTimeout(function(){
+      btnMore.style.display = "block"
+      btnMoreHide.style.display = "none"
+      hist.style.display = "none"
+    //},5000)
+    
+    }); 
 
 
